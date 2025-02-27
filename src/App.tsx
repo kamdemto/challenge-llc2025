@@ -562,7 +562,7 @@ function App() {
               <span className="font-bold text-lg">LinkedIn Local Douala 2025</span>
             </div>
             <div className="text-blue-300 text-sm">
-              © 2025 LinkedIn Local Douala | Build By <a href="https://linkedin.com/in/iamkto" className="h linkedin com" target='_blank'>IamKTO</a>. Tous droits réservés.
+              © 2025 LinkedIn Local Douala | Build By <a href="https://linkedin.com/in/iamkto" className="h linkedin com" target='_blank'>Olivier Kamdem</a>. Tous droits réservés.
             </div>
           </div>
         </div>
