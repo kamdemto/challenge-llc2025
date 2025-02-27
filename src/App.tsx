@@ -267,7 +267,7 @@ function App() {
             </div>
             <div className="relative h-64 sm:h-80 md:h-96 mb-8 animate" data-delay="200">
               <img 
-                src="http://erp.omegaventures.biz/banner-linkedin-local2.jpeg"
+                src="src/assets/banner-linkedin-local2.jpeg"
                 alt="LinkedIn Local Douala Event" 
                 className="w-full h-full object-cover rounded-lg shadow-2xl shadow-blue-500/20 border-4 border-blue-400/30 backdrop-blur-sm"
                 style={{ 
@@ -583,7 +583,7 @@ function App() {
             <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
               <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-blue-400/50 shadow-lg shadow-blue-500/20 flex-shrink-0">
                 <img 
-                  src="http://erp.omegaventures.biz/topprofil.png" 
+                  src="src/assets/topprofil.png" 
                   alt="Olivier Kamdem" 
                   className="w-full h-full object-cover"
                   onError={() => handleImageError('profile')}
