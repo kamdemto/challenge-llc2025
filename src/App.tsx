@@ -585,7 +585,7 @@ function App() {
               <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-blue-400/50 shadow-lg shadow-blue-500/20 flex-shrink-0">
                 <img 
                   src="src/assets/topprofil.png" 
-                  alt="Olivier Kamdem" 
+                  alt="IAMKTO" 
                   className="w-full h-full object-cover"
                   onError={() => handleImageError('profile')}
                 />
