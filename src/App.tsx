@@ -157,6 +157,27 @@ function App() {
     };
   }, [showNotification]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const elements = document.querySelectorAll('.animate');
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('animate-in');
+        } else {
+          el.classList.remove('animate-in');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -303,7 +324,7 @@ function App() {
   };
 
   return (
-    <div className={isDarkMode ? "bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white min-h-screen" : "bg-white text-black min-h-screen"}>
+    <div className={isDarkMode ? "bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white min-h-screen" : "bg-gray-100 text-gray-900 min-h-screen"}>
       {/* Cyber-inspired animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="cyber-grid"></div>
@@ -317,11 +338,11 @@ function App() {
             <span className="font-bold text-xl tracking-tight">LinkedIn Local Douala</span>
           </div>
           <nav className="hidden md:flex gap-8">
-            <button onClick={() => scrollToSection(heroRef)} className="hover:text-blue-300 transition">Accueil</button>
-            <button onClick={() => scrollToSection(statsRef)} className="hover:text-blue-300 transition">Statistiques</button>
-            <button onClick={() => scrollToSection(benefitsRef)} className="hover:text-blue-300 transition">Avantages</button>
-            <button onClick={() => scrollToSection(speakersRef)} className="hover:text-blue-300 transition">Les Intervants</button>
-            <button onClick={() => scrollToSection(contactRef)} className="hover:text-blue-300 transition">Contact</button>
+            <button onClick={() => scrollToSection(heroRef)} className="hover:text-blue-500 transition">Accueil</button>
+            <button onClick={() => scrollToSection(statsRef)} className="hover:text-blue-500 transition">Statistiques</button>
+            <button onClick={() => scrollToSection(benefitsRef)} className="hover:text-blue-500 transition">Avantages</button>
+            <button onClick={() => scrollToSection(speakersRef)} className="hover:text-blue-500 transition">Les Intervants</button>
+            <button onClick={() => scrollToSection(contactRef)} className="hover:text-blue-500 transition">Contact</button>
           </nav>
           <div className="flex items-center gap-4">
             <button 
@@ -347,7 +368,7 @@ function App() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 cyber-text">
               LinkedIn Local Douala 2025
             </h1>
-            <p className="text-xl md:text-2xl text-blue-200 mb-8">
+            <p className="text-xl md:text-2xl text-blue-700 mb-8">
               Devenez Partenaire de l'événement incontournable du networking et de la transformation digitale
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -359,7 +380,7 @@ function App() {
               </button>
               <button 
                 onClick={openLinkedInPage}
-                className="bg-transparent hover:bg-blue-800/50 px-6 py-3 rounded-md font-medium transition border border-blue-400/30 text-lg flex items-center justify-center gap-2"
+                className="bg-transparent hover:bg-blue-100 px-6 py-3 rounded-md font-medium transition border border-blue-400/30 text-lg flex items-center justify-center gap-2"
               >
                 En savoir plus <ChevronDown size={18} />
               </button>
@@ -397,39 +418,39 @@ function App() {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-20 relative bg-blue-900/50 backdrop-blur-md border-y border-blue-500/30">
+      <section ref={statsRef} className={isDarkMode ? "py-20 relative bg-blue-900/50 backdrop-blur-md border-y border-blue-500/30" : "py-20 relative bg-white border-y border-gray-300"}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center cyber-text animate" data-delay="0">
             Un événement d'envergure
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" data-delay="100">
-              <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30">
-                <Users className="text-blue-300" size={28} />
+            <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" : "bg-gray-100 rounded-lg p-6 border border-gray-300 shadow-lg text-center animate"} data-delay="100">
+              <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-300"}>
+                <Users className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
               </div>
               <h3 className="text-4xl font-bold mb-2 cyber-number">+300</h3>
-              <p className="text-blue-200">Professionnels réunis</p>
+              <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Professionnels réunis</p>
             </div>
-            <div className="bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" data-delay="200">
-              <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30">
-                <Building className="text-blue-300" size={28} />
+            <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" : "bg-gray-100 rounded-lg p-6 border border-gray-300 shadow-lg text-center animate"} data-delay="200">
+              <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-300"}>
+                <Building className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
               </div>
               <h3 className="text-4xl font-bold mb-2 cyber-number">+50</h3>
-              <p className="text-blue-200">Entreprises représentées</p>
+              <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Entreprises représentées</p>
             </div>
-            <div className="bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" data-delay="300">
-              <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30">
-                <BarChart3 className="text-blue-300" size={28} />
+            <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" : "bg-gray-100 rounded-lg p-6 border border-gray-300 shadow-lg text-center animate"} data-delay="300">
+              <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-300"}>
+                <BarChart3 className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
               </div>
               <h3 className="text-4xl font-bold mb-2 cyber-number">+100K</h3>
-              <p className="text-blue-200">Impressions digitales</p>
+              <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Impressions digitales</p>
             </div>
-            <div className="bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" data-delay="400">
-              <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30">
-                <Zap className="text-blue-300" size={28} />
+            <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-6 border border-blue-500/30 shadow-lg shadow-blue-500/10 text-center animate" : "bg-gray-100 rounded-lg p-6 border border-gray-300 shadow-lg text-center animate"} data-delay="400">
+              <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-400/30" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-300"}>
+                <Zap className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
               </div>
               <h3 className="text-4xl font-bold mb-2 cyber-number">∞</h3>
-              <p className="text-blue-200">Opportunités de collaboration</p>
+              <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Opportunités de collaboration</p>
             </div>
           </div>
         </div>
@@ -442,44 +463,44 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center cyber-text animate" data-delay="0">
               Pourquoi être partenaire ?
             </h2>
-            <p className="text-xl text-blue-200 mb-16 text-center animate" data-delay="100">
+            <p className={isDarkMode ? "text-xl text-blue-200 mb-16 text-center animate" : "text-xl text-gray-700 mb-16 text-center animate"} data-delay="100">
               Découvrez les avantages exclusifs réservés à nos partenaires
             </p>
             <div className="space-y-8">
               <div className="flex flex-col md:flex-row gap-6 items-start animate" data-delay="200">
-                <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0">
-                  <Award className="text-blue-300" size={28} />
+                <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center border border-blue-300 shrink-0"}>
+                  <Award className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Gagnez en visibilité</h3>
-                  <p className="text-blue-200">Votre marque mise en avant auprès d'une audience qualifiée de professionnels et décideurs du secteur.</p>
+                  <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Votre marque mise en avant auprès d'une audience qualifiée de professionnels et décideurs du secteur.</p>
                 </div>
               </div>
               <div className="flex flex-col md:flex-row gap-6 items-start animate" data-delay="300">
-                <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0">
-                  <Users className="text-blue-300" size={28} />
+                <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center border border-blue-300 shrink-0"}>
+                  <Users className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Rencontrez des talents et experts</h3>
-                  <p className="text-blue-200">Accédez à un vivier de professionnels qualifiés prêts à collaborer et à apporter leur expertise à votre entreprise.</p>
+                  <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Accédez à un vivier de professionnels qualifiés prêts à collaborer et à apporter leur expertise à votre entreprise.</p>
                 </div>
               </div>
               <div className="flex flex-col md:flex-row gap-6 items-start animate" data-delay="400">
-                <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0">
-                  <Building className="text-blue-300" size={28} />
+                <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center border border-blue-300 shrink-0"}>
+                  <Building className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Boostez votre image employeur</h3>
-                  <p className="text-blue-200">Montrez votre engagement pour le networking et le digital, et positionnez-vous comme un employeur de choix.</p>
+                  <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Montrez votre engagement pour le networking et le digital, et positionnez-vous comme un employeur de choix.</p>
                 </div>
               </div>
               <div className="flex flex-col md:flex-row gap-6 items-start animate" data-delay="500">
-                <div className="bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0">
-                  <Briefcase className="text-blue-300" size={28} />
+                <div className={isDarkMode ? "bg-blue-700/50 w-16 h-16 rounded-full flex items-center justify-center border border-blue-400/30 shrink-0" : "bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center border border-blue-300 shrink-0"}>
+                  <Briefcase className={isDarkMode ? "text-blue-300" : "text-blue-600"} size={28} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Des retombées stratégiques</h3>
-                  <p className="text-blue-200">Accédez à des contacts et opportunités d'affaires exclusives pour développer votre réseau et votre activité.</p>
+                  <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>Accédez à des contacts et opportunités d'affaires exclusives pour développer votre réseau et votre activité.</p>
                 </div>
               </div>
             </div>
@@ -556,22 +577,22 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center cyber-text animate" data-delay="0">
               Contactez-nous
             </h2>
-            <p className="text-xl text-blue-200 mb-16 text-center animate" data-delay="100">
+            <p className={isDarkMode ? "text-xl text-blue-200 mb-16 text-center animate" : "text-xl text-gray-700 mb-16 text-center animate"} data-delay="100">
               Pour explorer les opportunités de partenariat
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-blue-800/50 backdrop-blur-md rounded-lg p-8 border border-blue-500/30 shadow-lg shadow-blue-500/10 animate" data-delay="200">
+              <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-8 border border-blue-500/30 shadow-lg shadow-blue-500/10 animate" : "bg-gray-100 rounded-lg p-8 border border-gray-300 shadow-lg animate"} data-delay="200">
                 <h3 className="text-2xl font-bold mb-6">Envoyez-nous un message</h3>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <label htmlFor="name" className="block text-blue-200 mb-2">Nom</label>
+                    <label htmlFor="name" className={isDarkMode ? "block text-blue-200 mb-2" : "block text-gray-700 mb-2"}>Nom</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full bg-blue-900/50 border ${formErrors.name ? 'border-red-500' : 'border-blue-500/30'} rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-400`}
+                      className={`w-full ${isDarkMode ? 'bg-blue-900/50 border' : 'bg-white border'} ${formErrors.name ? 'border-red-500' : isDarkMode ? 'border-blue-500/30' : 'border-gray-300'} rounded-md px-4 py-2 ${isDarkMode ? 'text-white' : 'text-gray-900'} focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-blue-400' : 'focus:ring-blue-500'}`}
                       placeholder="Votre nom"
                     />
                     {formErrors.name && (
@@ -579,14 +600,14 @@ function App() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-blue-200 mb-2">Email</label>
+                    <label htmlFor="email" className={isDarkMode ? "block text-blue-200 mb-2" : "block text-gray-700 mb-2"}>Email</label>
                     <input 
                       type="email" 
                       id="email" 
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className={`w-full bg-blue-900/50 border ${formErrors.email ? 'border-red-500' : 'border-blue-500/30'} rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-400`}
+                      className={`w-full ${isDarkMode ? 'bg-blue-900/50 border' : 'bg-white border'} ${formErrors.email ? 'border-red-500' : isDarkMode ? 'border-blue-500/30' : 'border-gray-300'} rounded-md px-4 py-2 ${isDarkMode ? 'text-white' : 'text-gray-900'} focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-blue-400' : 'focus:ring-blue-500'}`}
                       placeholder="Votre email"
                     />
                     {formErrors.email && (
@@ -594,14 +615,14 @@ function App() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="company" className="block text-blue-200 mb-2">Entreprise</label>
+                    <label htmlFor="company" className={isDarkMode ? "block text-blue-200 mb-2" : "block text-gray-700 mb-2"}>Entreprise</label>
                     <input 
                       type="text" 
                       id="company" 
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className={`w-full bg-blue-900/50 border ${formErrors.company ? 'border-red-500' : 'border-blue-500/30'} rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-400`}
+                      className={`w-full ${isDarkMode ? 'bg-blue-900/50 border' : 'bg-white border'} ${formErrors.company ? 'border-red-500' : isDarkMode ? 'border-blue-500/30' : 'border-gray-300'} rounded-md px-4 py-2 ${isDarkMode ? 'text-white' : 'text-gray-900'} focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-blue-400' : 'focus:ring-blue-500'}`}
                       placeholder="Nom de votre entreprise"
                     />
                     {formErrors.company && (
@@ -609,14 +630,14 @@ function App() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-blue-200 mb-2">Message</label>
+                    <label htmlFor="message" className={isDarkMode ? "block text-blue-200 mb-2" : "block text-gray-700 mb-2"}>Message</label>
                     <textarea 
                       id="message" 
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      className={`w-full bg-blue-900/50 border ${formErrors.message ? 'border-red-500' : 'border-blue-500/30'} rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-400`}
+                      className={`w-full ${isDarkMode ? 'bg-blue-900/50 border' : 'bg-white border'} ${formErrors.message ? 'border-red-500' : isDarkMode ? 'border-blue-500/30' : 'border-gray-300'} rounded-md px-4 py-2 ${isDarkMode ? 'text-white' : 'text-gray-900'} focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-blue-400' : 'focus:ring-blue-500'}`}
                       placeholder="Votre message"
                     ></textarea>
                     {formErrors.message && (
@@ -626,43 +647,43 @@ function App() {
                   <button 
                     type="submit" 
                     disabled={!isFormValid() || isSubmitting}
-                    className={`px-6 py-3 rounded-md font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 w-full flex items-center justify-center gap-2 ${isFormValid() ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-700/50 cursor-not-allowed'}`}
+                    className={`px-6 py-3 rounded-md font-medium transition transform hover:scale-105 border ${isDarkMode ? 'border-blue-400/50 shadow-lg shadow-blue-500/20' : 'border-gray-300 shadow-lg'} w-full flex items-center justify-center gap-2 ${isFormValid() ? 'bg-blue-500 hover:bg-blue-400' : 'bg-blue-700/50 cursor-not-allowed'}`}
                   >
                     {isSubmitting ? 'Envoi en cours...' : 'Envoyer'}
                   </button>
                 </form>
               </div>
-              <div className="bg-blue-800/50 backdrop-blur-md rounded-lg p-8 border border-blue-500/30 shadow-lg shadow-blue-500/10 animate" data-delay="300">
+              <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-8 border border-blue-500/30 shadow-lg shadow-blue-500/10 animate" : "bg-gray-100 rounded-lg p-8 border border-gray-300 shadow-lg animate"} data-delay="300">
                 <h3 className="text-2xl font-bold mb-6">Informations de contact</h3>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <Phone className="text-blue-300 shrink-0 mt-1" size={24} />
+                    <Phone className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
                     <div>
                       <h4 className="font-medium mb-1">Téléphone</h4>
-                      <p className="text-blue-200">+237 656 486 222 | +237 654 869 658</p>
+                      <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>+237 656 486 222 | +237 654 869 658</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <Mail className="text-blue-300 shrink-0 mt-1" size={24} />
+                    <Mail className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
                     <div>
                       <h4 className="font-medium mb-1">Email</h4>
-                      <p className="text-blue-200">infos@stayupgroup.com</p>
+                      <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>infos@stayupgroup.com</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <Linkedin className="text-blue-300 shrink-0 mt-1" size={24} />
+                    <Linkedin className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
                     <div>
                       <h4 className="font-medium mb-1">LinkedIn</h4>
-                      <p className="text-blue-200">linkedin.com/company/linkedin-local-douala</p>
+                      <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>linkedin.com/company/linkedin-local-douala</p>
                     </div>
                   </div>
                   <div className="mt-8">
                     <h4 className="font-medium mb-4">Suivez-nous</h4>
                     <div className="flex gap-4">
-                      <a href="https://www.linkedin.com/company/linkedin-local-douala/" target="_blank" rel="noopener noreferrer" className="bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition">
+                      <a href="https://www.linkedin.com/company/linkedin-local-douala/" target="_blank" rel="noopener noreferrer" className={isDarkMode ? "bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition" : "bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center border border-blue-300 hover:bg-blue-200 transition"}>
                         <Linkedin size={20} />
                       </a>
-                      <a href="mailto:infos@stayupgroup.com" className="bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition">
+                      <a href="mailto:infos@stayupgroup.com" className={isDarkMode ? "bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition" : "bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center border border-blue-300 hover:bg-blue-200 transition"}>
                         <Mail size={20} />
                       </a>
                     </div>
@@ -670,19 +691,19 @@ function App() {
                   <div className="mt-8 pt-8 border-t border-blue-500/30">
                     <h4 className="font-medium mb-4">Hashtags</h4>
                     <div className="flex flex-wrap gap-2">
-                      <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
                         #LinkedInLocalDouala
                       </span>
-                      <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
                         #Networking
                       </span>
-                      <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
                         #BusinessOpportunities
                       </span>
-                      <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
                         #Entreprises
                       </span>
-                      <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
                         #Partenariat
                       </span>
                     </div>
