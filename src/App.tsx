@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Linkedin, Mail, ChevronDown, Building, Users, BarChart3, Zap, Award, Briefcase, Globe, X, HelpCircle, Package, Phone, CheckCircle, PartyPopper, Palette } from 'lucide-react';
+import { Linkedin, Mail, ChevronDown, Building, Users, BarChart3, Zap, Award, Briefcase, Globe, X, HelpCircle, Package, Phone, CheckCircle, PartyPopper, Palette, ArrowRight, ArrowLeft, Sun, Moon } from 'lucide-react';
 import { fallbackImages } from './assets/images';
 import confetti from 'canvas-confetti';
 
@@ -8,6 +8,7 @@ function App() {
   const statsRef = useRef<HTMLDivElement>(null);
   const benefitsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const speakersRef = useRef<HTMLDivElement>(null);
   const [showPopup, setShowPopup] = useState(false);
   const [imageErrors, setImageErrors] = useState({
     banner: false,
@@ -29,6 +30,87 @@ function App() {
   });
   const [showNotification, setShowNotification] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const speakers = [
+    {
+      name: 'John Doe',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker1.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    {
+      name: 'Olovier Kamdem',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker2.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    {
+      name: 'BWAMOU FABRICE',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker3.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    {
+      name: 'John Doe',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker4.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    {
+      name: 'John Doe',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker5.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    {
+      name: 'John Doe',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker6.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    {
+      name: 'John Doe',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker7.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    }, {
+      name: 'John Doe',
+      function: 'CEO at Company',
+      theme: 'Digital Transformation',
+      image: '/src/assets/speaker8.jpg',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      twitter: 'https://twitter.com/johndoe',
+      // ...other social links...
+    },
+    // ...7 more speakers...
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -212,33 +294,49 @@ function App() {
     e.stopPropagation();
   };
 
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % Math.ceil(speakers.length / 4));
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + Math.ceil(speakers.length / 4)) % Math.ceil(speakers.length / 4));
+  };
+
   return (
-    <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white min-h-screen">
+    <div className={isDarkMode ? "bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white min-h-screen" : "bg-white text-black min-h-screen"}>
       {/* Cyber-inspired animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="cyber-grid"></div>
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-blue-900/80 backdrop-blur-md border-b border-blue-500/30">
+      <header className={isDarkMode ? "fixed top-0 left-0 right-0 z-50 bg-blue-900/80 backdrop-blur-md border-b border-blue-500/30" : "fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-300"}>
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Linkedin className="text-blue-400" size={28} />
+            <Linkedin className={isDarkMode ? "text-blue-400" : "text-blue-600"} size={28} />
             <span className="font-bold text-xl tracking-tight">LinkedIn Local Douala</span>
           </div>
           <nav className="hidden md:flex gap-8">
             <button onClick={() => scrollToSection(heroRef)} className="hover:text-blue-300 transition">Accueil</button>
             <button onClick={() => scrollToSection(statsRef)} className="hover:text-blue-300 transition">Statistiques</button>
             <button onClick={() => scrollToSection(benefitsRef)} className="hover:text-blue-300 transition">Avantages</button>
-            <button  className="hover:text-blue-300 transition">Les Intervants</button>
+            <button onClick={() => scrollToSection(speakersRef)} className="hover:text-blue-300 transition">Les Intervants</button>
             <button onClick={() => scrollToSection(contactRef)} className="hover:text-blue-300 transition">Contact</button>
           </nav>
-          <button 
-            onClick={() => setShowPopup(true)}
-            className="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 flex items-center gap-2"
-          >
-            About Me <HelpCircle size={16} />
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setShowPopup(true)}
+              className="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 flex items-center gap-2"
+            >
+              About Me <HelpCircle size={16} />
+            </button>
+            <button 
+              onClick={toggleTheme}
+              className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20"
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -384,6 +482,48 @@ function App() {
                   <p className="text-blue-200">Accédez à des contacts et opportunités d'affaires exclusives pour développer votre réseau et votre activité.</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Speakers Section */}
+      <section ref={speakersRef} className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center cyber-text animate" data-delay="0">
+            Les Intervenants
+          </h2>
+          <div className="flex justify-between items-center mb-4">
+            <button onClick={handlePrev} className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full">
+              <ArrowLeft size={24} />
+            </button>
+            <button onClick={handleNext} className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full">
+              <ArrowRight size={24} />
+            </button>
+          </div>
+          <div className="overflow-hidden">
+            <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+              {speakers.map((speaker, index) => (
+                <div key={index} className="w-1/4 flex-shrink-0 p-4">
+                  <div className="relative group">
+                    <img src={speaker.image} alt={speaker.name} className="w-full h-64 object-cover rounded-lg shadow-lg" />
+                    <div className="absolute inset-0 bg-blue-900/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <p className="text-white text-lg">{speaker.theme}</p>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mt-4">{speaker.name}</h3>
+                  <p className="text-blue-200">{speaker.function}</p>
+                  <div className="flex gap-2 mt-2">
+                    <a href={speaker.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
+                      <Linkedin size={20} />
+                    </a>
+                    <a href={speaker.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
+                      {/* <Twitter size={20} /> */}
+                    </a>
+                    {/* ...other social links... */}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -568,7 +708,7 @@ function App() {
           </div>
         </div>
       </footer>
-
+                    
       {/* Olivier Kamdem Popup */}
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -580,7 +720,7 @@ function App() {
             >
               <X size={18} />
             </button>
-            
+        
             <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
               <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-blue-400/50 shadow-lg shadow-blue-500/20 flex-shrink-0">
                 <img 
