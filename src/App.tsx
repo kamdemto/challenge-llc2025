@@ -230,6 +230,7 @@ function App() {
             <button onClick={() => scrollToSection(heroRef)} className="hover:text-blue-300 transition">Accueil</button>
             <button onClick={() => scrollToSection(statsRef)} className="hover:text-blue-300 transition">Statistiques</button>
             <button onClick={() => scrollToSection(benefitsRef)} className="hover:text-blue-300 transition">Avantages</button>
+            <button  className="hover:text-blue-300 transition">Les Intervants</button>
             <button onClick={() => scrollToSection(contactRef)} className="hover:text-blue-300 transition">Contact</button>
           </nav>
           <button 
