@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Linkedin, Mail, ChevronDown, Building, Users, BarChart3, Zap, Award, Briefcase, Globe, X, HelpCircle, Package, Phone, CheckCircle, PartyPopper, Github, Youtube, Palette, Lightbulb, Sparkles, Megaphone } from 'lucide-react';
+import { Linkedin, Mail, ChevronDown, Building, Users, BarChart3, Zap, Award, Briefcase, Globe, X, HelpCircle, Package, Phone, CheckCircle, PartyPopper, Palette } from 'lucide-react';
 import { fallbackImages } from './assets/images';
 import confetti from 'canvas-confetti';
 
@@ -562,7 +562,7 @@ function App() {
               <span className="font-bold text-lg">LinkedIn Local Douala 2025</span>
             </div>
             <div className="text-blue-300 text-sm">
-              © 2025 LinkedIn Local Douala. Tous droits réservés.
+              © 2025 LinkedIn Local Douala | Build By <a href="https://linkedin.com/in/iamkto" className="h linkedin com" target='_blank'>IamKTO</a>. Tous droits réservés.
             </div>
           </div>
         </div>
@@ -618,7 +618,7 @@ function App() {
                       rel="noopener noreferrer"
                       className="bg-blue-700/50 hover:bg-blue-600/50 px-4 py-2 rounded-md flex items-center gap-2 border border-blue-400/30 transition"
                     >
-                      <Twitter size={18} />
+                      {/* <Twitter size={18} /> */}
                       <span>Twitter</span>
                     </a>
                     <a 
@@ -627,7 +627,7 @@ function App() {
                       rel="noopener noreferrer"
                       className="bg-blue-700/50 hover:bg-blue-600/50 px-4 py-2 rounded-md flex items-center gap-2 border border-blue-400/30 transition"
                     >
-                      <Instagram size={18} />
+                      {/* <Instagram size={18} /> */}
                       <span>Instagram</span>
                     </a>
                     <a 
@@ -650,7 +650,7 @@ function App() {
                       rel="noopener noreferrer"
                       className="bg-blue-700/50 hover:bg-blue-600/50 px-4 py-2 rounded-md flex items-center gap-2 border border-blue-400/30 transition"
                     >
-                      <Github size={18} />
+                      {/* <Github size={18} /> */}
                       <span>GitHub</span>
                     </a>
                     <a 
@@ -659,7 +659,7 @@ function App() {
                       rel="noopener noreferrer"
                       className="bg-blue-700/50 hover:bg-blue-600/50 px-4 py-2 rounded-md flex items-center gap-2 border border-blue-400/30 transition"
                     >
-                      <Youtube size={18} />
+                      {/* <Youtube size={18} /> */}
                       <span>YouTube</span>
                     </a>
                     <a 
