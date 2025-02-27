@@ -14,17 +14,15 @@ Ce site web a été conçu pour :
 ## 🛠️ Technologies utilisées
 
 Le projet a été développé avec :
-- **HTML, CSS, JavaScript** (Front-end)
-- **Bootstrap / TailwindCSS** (UI Styling)
-- **PHP / Python** (Back-end, si applicable)
-- **MySQL / Firebase** (Base de données, si applicable)
+- **HTML, React, Vite** (Front-end)
+- **TailwindCSS** (UI Styling)
 
 ## 🚀 Déploiement et installation
 
 ### 🔧 Prérequis
 - Un serveur web (Apache, Nginx)
-- PHP 7+ (si back-end PHP)
-- Node.js (si applicable)
+- javascript
+- Node.js 
 - Une base de données MySQL ou autre
 
 ### 📌 Installation
