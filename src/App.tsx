@@ -36,6 +36,8 @@ function App() {
   const [showBriefPopup, setShowBriefPopup] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [showWhatsAppTooltip, setShowWhatsAppTooltip] = useState(false);
+  const [showPassTooltip, setShowPassTooltip] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -43,75 +45,75 @@ function App() {
 
   const speakers = [
     {
-      name: 'John Doe',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Alice Johnson',
+      function: 'CTO at InnovateTech',
+      theme: 'AI and Machine Learning',
       image: './speaker1.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/alicejohnson',
+      twitter: 'https://twitter.com/alicejohnson',
       // ...other social links...
     },
     {
-      name: 'Olovier Kamdem',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Bob Smith',
+      function: 'Head of Marketing at MarketGurus',
+      theme: 'Digital Marketing Strategies',
       image: '/speaker2.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/bobsmith',
+      twitter: 'https://twitter.com/bobsmith',
       // ...other social links...
     },
     {
-      name: 'BWAMOU FABRICE',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Carol White',
+      function: 'CEO at FutureVision',
+      theme: 'Future of Work',
       image: '/speaker3.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/carolwhite',
+      twitter: 'https://twitter.com/carolwhite',
       // ...other social links...
     },
     {
-      name: 'John Doe',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'David Brown',
+      function: 'Product Manager at TechWave',
+      theme: 'Product Management Best Practices',
       image: '/speaker4.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/davidbrown',
+      twitter: 'https://twitter.com/davidbrown',
       // ...other social links...
     },
     {
-      name: 'John Doe',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Eva Green',
+      function: 'Data Scientist at DataMinds',
+      theme: 'Big Data and Analytics',
       image: '/speaker5.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/evagreen',
+      twitter: 'https://twitter.com/evagreen',
       // ...other social links...
     },
     {
-      name: 'John Doe',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Frank Harris',
+      function: 'Cybersecurity Expert at SecureNet',
+      theme: 'Cybersecurity Trends',
       image: './speaker6.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/frankharris',
+      twitter: 'https://twitter.com/frankharris',
       // ...other social links...
     },
     {
-      name: 'John Doe',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Grace Lee',
+      function: 'UX Designer at CreativeDesigns',
+      theme: 'User Experience Design',
       image: './speaker7.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/gracelee',
+      twitter: 'https://twitter.com/gracelee',
       // ...other social links...
-    }, 
+    },
     {
-      name: 'John Doe',
-      function: 'CEO at Company',
-      theme: 'Digital Transformation',
+      name: 'Henry Adams',
+      function: 'Blockchain Developer at BlockChainers',
+      theme: 'Blockchain Technology',
       image: '/speaker8.jpg',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://linkedin.com/in/henryadams',
+      twitter: 'https://twitter.com/henryadams',
       // ...other social links...
     },
     // ...7 more speakers...
@@ -209,7 +211,7 @@ function App() {
   };
 
   const openPackageWhatsApp = () => {
-    window.open('https://wa.me/23756486222?text=Hello%20Laure,%20j%27aimerai%20en%20savoir%20plus%20sur%20les%20parckage%20entreprise%20sur%20LinkedinLocal%20Douala%20edition', '_blank');
+    window.open('https://wa.me/23756486222?text=Hello%20Laure,%20j%27aimerai%20en%20savoir%20plus%20sur%20les%20package%20entreprise%20sur%20LinkedinLocal%20Douala%20edition', '_blank');
   };
 
   const openLinkedInPage = () => {
@@ -312,9 +314,8 @@ function App() {
         message: ''
       });
       
-      // In a real application, you would send an email to the specified addresses:
-      // - infos@stayupgroup.com
-      // - kamdemto@gmail.com (cc)
+      // In a real application, you would send an email to the specified address:
+      // - kamdemto@gmail.com
       
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -362,7 +363,7 @@ function App() {
   };
 
   const openWhatsApp = () => {
-    window.open('https://wa.me/237694846159?text=Hi%20Olivier,%20j%27aimerai%20...', '_blank');
+    window.open('https://wa.me/23756486222?text=Hello%20Laure,%20j%27aimerai%20en%20savoir%20plus%20sur%20les%20package%20entreprise%20sur%20LinkedinLocal%20Douala%20edition', '_blank');
   };
 
   return (
@@ -384,7 +385,12 @@ function App() {
             <button onClick={() => scrollToSection(statsRef)} className="hover:text-blue-500 transition">Statistiques</button>
             <button onClick={() => scrollToSection(benefitsRef)} className="hover:text-blue-500 transition">Avantages</button>
             <button onClick={() => scrollToSection(speakersRef)} className="hover:text-blue-500 transition">Les Intervants</button>
-            <button onClick={() => scrollToSection(contactRef)} className="hover:text-blue-500 transition">Contact</button>
+            <button onClick={() => scrollToSection(contactRef)} className="hover:text-blue-500 transition left-8">Nous Contacter</button>
+            <button className="relative hover:text-blue-500 transition right-4">
+              Top Challenger
+              <span className="absolute top-0 right-{-20} bg-yellow-500 text-black text-xs px-2 py-1 rounded-full">Soon</span>
+            </button>
+           
           </nav>
           <div className="flex items-center gap-4">
             <button 
@@ -422,7 +428,7 @@ function App() {
               </button>
               <button 
                 onClick={openLinkedInPage}
-                className="bg-transparent hover:bg-blue-100 px-6 py-3 rounded-md font-medium transition border border-blue-400/30 text-lg flex items-center justify-center gap-2"
+                className="bg-transparent hover:bg-green-100  hover:text-black px-6 py-3 rounded-md font-medium transition border border-blue-400/30 text-lg flex items-center justify-center gap-2"
               >
                 En savoir plus <ChevronDown size={18} />
               </button>
@@ -606,12 +612,30 @@ function App() {
             <p className="text-xl text-blue-200 mb-8">
               Rejoignez le mouvement LinkedIn Local Douala et positionnez votre entreprise comme un acteur clé du digital en Afrique !
             </p>
-            <button 
-              onClick={openPackagePopup}
-              className="bg-blue-500 hover:bg-blue-400 px-8 py-4 rounded-md font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 text-lg inline-flex items-center gap-2"
-            >
-              Souscrire à un package <Package size={20} />
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={openPackagePopup}
+                className="bg-blue-500 hover:bg-blue-400 px-8 py-4 rounded-md font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 text-lg inline-flex items-center gap-2"
+              >
+                Souscrire à un package <Package size={20} />
+              </button>
+              <div 
+                className="relative"
+                onMouseEnter={() => setShowPassTooltip(true)}
+                onMouseLeave={() => setShowPassTooltip(false)}
+              >
+                {showPassTooltip && (
+                  <div className="absolute bottom-full mb-2 bg-gray-800 text-white text-sm px-3 py-1 rounded-md">
+                    Achete ton Pass = 10.000 
+                  </div>
+                )}
+                <button 
+                  className="bg-transparent hover:bg-green-100 hover:text-black px-8 py-4 rounded-md font-medium transition border border-blue-400/30 text-lg inline-flex items-center gap-2"
+                >
+                  Acheter un pass
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1025,15 +1049,23 @@ function App() {
       )}
 
       {/* Floating WhatsApp Button */}
-      <button 
-        onClick={openWhatsApp}
-        className="fixed bottom-4 right-4 bg-green-500 hover:bg-green-400 text-white p-4 rounded-full shadow-lg transition transform hover:scale-105"
+      <div 
+        className="fixed bottom-4 right-8 flex items-center"
+        onMouseEnter={() => setShowWhatsAppTooltip(true)}
+        onMouseLeave={() => setShowWhatsAppTooltip(false)}
       >
-        <svg xmlns="/watsapp.svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21.5 20.5L18 17M22 11.5A10.5 10.5 0 1 1 11.5 1 10.5 10.5 0 0 1 22 11.5z"/>
-          <path d="M16.5 11.5c-.5-1-1.5-2-2.5-2.5s-2-.5-3 0-1.5 1-2 2-1 2-1 3 .5 2 1 3 1.5 1.5 2.5 2 2 .5 3 0 2-1 2.5-2 .5-2 0-3z"/>
-        </svg>
-      </button>
+        {showWhatsAppTooltip && (
+          <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-md mr-2">
+            Discutons sur Whatsapp !
+          </div>
+        )}
+        <button 
+          onClick={openWhatsApp}
+          className="bg-green-500 hover:bg-green-400 text-white p-4 rounded-full shadow-lg transition transform hover:scale-105"
+        >
+          <img src="/whatsapp.svg" alt="WhatsApp" width="32" height="32" />
+        </button>
+      </div>
     </div>
   );
 }
