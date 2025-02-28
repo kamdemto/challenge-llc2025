@@ -316,11 +316,11 @@ function App() {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % Math.ceil(speakers.length / 4));
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % speakers.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + Math.ceil(speakers.length / 4)) % Math.ceil(speakers.length / 4));
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + speakers.length) % speakers.length);
   };
 
   return (
@@ -525,7 +525,7 @@ function App() {
           <div className="overflow-hidden">
             <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
               {speakers.map((speaker, index) => (
-                <div key={index} className="w-1/4 flex-shrink-0 p-4">
+                <div key={index} className="w-full sm:w-1/4 flex-shrink-0 p-4">
                   <div className="relative group">
                     <img src={speaker.image} alt={speaker.name} className="w-full h-64 object-cover rounded-lg shadow-lg" />
                     <div className="absolute inset-0 bg-blue-900/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
