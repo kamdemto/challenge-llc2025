@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Linkedin, Mail, ChevronDown, Building, Users, BarChart3, Zap, Award, Briefcase, Globe, X, HelpCircle, Package, Phone, CheckCircle, PartyPopper, Palette, ArrowRight, ArrowLeft, Sun, Moon } from 'lucide-react';
-import { fallbackImages } from './assets/images';
+import { fallbackImages } from '../public/images';
 import confetti from 'canvas-confetti';
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker1.jpg',
+      image: './speaker1.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -51,7 +51,7 @@ function App() {
       name: 'Olovier Kamdem',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker2.jpg',
+      image: '/speaker2.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -60,7 +60,7 @@ function App() {
       name: 'BWAMOU FABRICE',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker3.jpg',
+      image: '/speaker3.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -69,7 +69,7 @@ function App() {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker4.jpg',
+      image: '/speaker4.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -78,7 +78,7 @@ function App() {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker5.jpg',
+      image: '/speaker5.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -87,7 +87,7 @@ function App() {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker6.jpg',
+      image: './speaker6.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -96,7 +96,7 @@ function App() {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker7.jpg',
+      image: './speaker7.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -104,7 +104,7 @@ function App() {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
-      image: '/src/assets/speaker8.jpg',
+      image: '/speaker8.jpg',
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
@@ -387,7 +387,7 @@ function App() {
             </div>
             <div className="relative h-64 sm:h-80 md:h-96 mb-8 animate" data-delay="200">
               <img 
-                src="src/assets/banner-linkedin-local2.jpeg"
+                src="/banner-linkedin-local2.jpeg"
                 alt="LinkedIn Local Douala Event" 
                 className="w-full h-full object-cover rounded-lg shadow-2xl shadow-blue-500/20 border-4 border-blue-400/30 backdrop-blur-sm"
                 style={{ 
@@ -745,7 +745,7 @@ function App() {
             <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
               <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-blue-400/50 shadow-lg shadow-blue-500/20 flex-shrink-0">
                 <img 
-                  src="src/assets/topprofil.png" 
+                  src="topprofil.png" 
                   alt="olivier Kamdem" 
                   className="w-full h-full object-cover"
                   onError={() => handleImageError('profile')}
