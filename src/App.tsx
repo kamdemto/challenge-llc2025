@@ -38,6 +38,7 @@ function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [showWhatsAppTooltip, setShowWhatsAppTooltip] = useState(false);
   const [showPassTooltip, setShowPassTooltip] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -225,6 +226,14 @@ function App() {
     return () => clearInterval(interval);
   }, [isHovered, currentIndex]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Simulate a loading time of 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -387,6 +396,17 @@ function App() {
     window.open('https://wa.me/23756486222?text=Hello%20Laure,%20j%27aimerai%20en%20savoir%20plus%20sur%20les%20package%20entreprise%20sur%20LinkedinLocal%20Douala%20edition', '_blank');
   };
 
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-blue-950 text-white">
+        <div className="text-center animate-fade-in">
+          <div className="loader"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={isDarkMode ? "bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white min-h-screen" : "bg-gray-100 text-gray-900 min-h-screen"}>
       {/* Cyber-inspired animated background */}
@@ -433,7 +453,7 @@ function App() {
       {/* Hero Section */}
       <section ref={heroRef} className="pt-32 pb-20 relative">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center animate" data-delay="0">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 cyber-text">
               LinkedIn Local Douala 2025
             </h1>
@@ -454,7 +474,7 @@ function App() {
                 En savoir plus <ChevronDown size={18} />
               </button>
             </div>
-            <div className="relative h-64 sm:h-80 md:h-96 mb-8 animate" data-delay="200">
+            <div className="relative h-64 sm:h-80 md:h-96 mb-8">
               <img 
                 src="/banner-linkedin-local2.jpeg"
                 alt="LinkedIn Local Douala Event" 
