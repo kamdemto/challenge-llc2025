@@ -32,6 +32,10 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [showPackagePopup, setShowPackagePopup] = useState(false);
+  const [showBriefPopup, setShowBriefPopup] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -100,7 +104,8 @@ function App() {
       linkedin: 'https://linkedin.com/in/johndoe',
       twitter: 'https://twitter.com/johndoe',
       // ...other social links...
-    }, {
+    }, 
+    {
       name: 'John Doe',
       function: 'CEO at Company',
       theme: 'Digital Transformation',
@@ -178,12 +183,29 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    let scrollInterval: ReturnType<typeof setInterval>;
+
+    if (!isHovered) {
+      scrollInterval = setInterval(() => {
+        setScrollPosition((prevPosition) => prevPosition + 1);
+      }, 20); // Adjust the speed of the scroll
+    }
+
+    return () => {
+      if (scrollInterval) clearInterval(scrollInterval);
+    };
+  }, [isHovered]);
+
+  useEffect(() => {
+    const totalWidth = speakers.length * 1;
+    if (scrollPosition >= totalWidth) {
+      setScrollPosition(0);
+    }
+  }, [scrollPosition, speakers.length]);
+
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const openWhatsApp = () => {
-    window.open('https://wa.me/694846159?text=Bonjour%20Olivier,%20j%27ai%20une%20question%20sur%20%23linkedinLocal2025', '_blank');
   };
 
   const openPackageWhatsApp = () => {
@@ -323,6 +345,26 @@ function App() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + speakers.length) % speakers.length);
   };
 
+  const openPackagePopup = () => {
+    setShowPackagePopup(true);
+  };
+
+  const closePackagePopup = () => {
+    setShowPackagePopup(false);
+  };
+
+  const openBriefPopup = () => {
+    setShowBriefPopup(true);
+  };
+
+  const closeBriefPopup = () => {
+    setShowBriefPopup(false);
+  };
+
+  const openWhatsApp = () => {
+    window.open('https://wa.me/237694846159?text=Hi%20Olivier,%20j%27aimerai%20...', '_blank');
+  };
+
   return (
     <div className={isDarkMode ? "bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white min-h-screen" : "bg-gray-100 text-gray-900 min-h-screen"}>
       {/* Cyber-inspired animated background */}
@@ -373,10 +415,10 @@ function App() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <button 
-                onClick={openWhatsApp}
+                onClick={openBriefPopup}
                 className="bg-blue-500 hover:bg-blue-400 px-6 py-3 rounded-md font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 text-lg"
               >
-                Devenir Partenaire
+                LLD2025 en bref...
               </button>
               <button 
                 onClick={openLinkedInPage}
@@ -522,10 +564,14 @@ function App() {
               <ArrowRight size={24} />
             </button>
           </div>
-          <div className="overflow-hidden">
-            <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+          <div 
+            className="overflow-hidden whitespace-nowrap scrollbar-hide"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="inline-flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
               {speakers.map((speaker, index) => (
-                <div key={index} className="w-full sm:w-1/4 flex-shrink-0 p-4">
+                <div key={index} className="w-full sm:w-1/4 md:w-1/4 flex-shrink-0 p-4">
                   <div className="relative group">
                     <img src={speaker.image} alt={speaker.name} className="w-full h-64 object-cover rounded-lg shadow-lg" />
                     <div className="absolute inset-0 bg-blue-900/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -561,7 +607,7 @@ function App() {
               Rejoignez le mouvement LinkedIn Local Douala et positionnez votre entreprise comme un acteur clé du digital en Afrique !
             </p>
             <button 
-              onClick={openPackageWhatsApp}
+              onClick={openPackagePopup}
               className="bg-blue-500 hover:bg-blue-400 px-8 py-4 rounded-md font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 text-lg inline-flex items-center gap-2"
             >
               Souscrire à un package <Package size={20} />
@@ -571,8 +617,9 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section ref={contactRef} className="py-20 relative">
-        <div className="container mx-auto px-4">
+      <section ref={contactRef} className="py-20 relative" style={{ backgroundImage: "url('/background.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-800/100 to-transparent"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center cyber-text animate" data-delay="0">
               Contactez-nous
@@ -653,59 +700,66 @@ function App() {
                   </button>
                 </form>
               </div>
-              <div className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-8 border border-blue-500/30 shadow-lg shadow-blue-500/10 animate" : "bg-gray-100 rounded-lg p-8 border border-gray-300 shadow-lg animate"} data-delay="300">
-                <h3 className="text-2xl font-bold mb-6">Informations de contact</h3>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <Phone className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
-                    <div>
-                      <h4 className="font-medium mb-1">Téléphone</h4>
-                      <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>+237 656 486 222 | +237 654 869 658</p>
+              <div 
+                className={isDarkMode ? "bg-blue-800/50 backdrop-blur-md rounded-lg p-8 border border-blue-500/30 shadow-lg shadow-blue-500/10 animate relative" : "bg-gray-100 rounded-lg p-8 border border-gray-300 shadow-lg animate relative"} 
+                data-delay="300"
+               
+              >
+                <div className="absolute inset-0 bg-blue-900/50 backdrop-blur-md rounded-lg"></div>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold mb-6">Informations de contact</h3>
+                  <div className="space-y-6">
+                    <div className="flex items-start gap-4">
+                      <Phone className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
+                      <div>
+                        <h4 className="font-medium mb-1">Téléphone</h4>
+                        <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>+237 656 486 222 | +237 654 869 658</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Mail className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
-                    <div>
-                      <h4 className="font-medium mb-1">Email</h4>
-                      <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>infos@stayupgroup.com</p>
+                    <div className="flex items-start gap-4">
+                      <Mail className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
+                      <div>
+                        <h4 className="font-medium mb-1">Email</h4>
+                        <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>infos@stayupgroup.com</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Linkedin className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
-                    <div>
-                      <h4 className="font-medium mb-1">LinkedIn</h4>
-                      <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>linkedin.com/company/linkedin-local-douala</p>
+                    <div className="flex items-start gap-4">
+                      <Linkedin className={isDarkMode ? "text-blue-300 shrink-0 mt-1" : "text-blue-600 shrink-0 mt-1"} size={24} />
+                      <div>
+                        <h4 className="font-medium mb-1">LinkedIn</h4>
+                        <p className={isDarkMode ? "text-blue-200" : "text-gray-700"}>linkedin.com/company/linkedin-local-douala</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-8">
-                    <h4 className="font-medium mb-4">Suivez-nous</h4>
-                    <div className="flex gap-4">
-                      <a href="https://www.linkedin.com/company/linkedin-local-douala/" target="_blank" rel="noopener noreferrer" className={isDarkMode ? "bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition" : "bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center border border-blue-300 hover:bg-blue-200 transition"}>
-                        <Linkedin size={20} />
-                      </a>
-                      <a href="mailto:infos@stayupgroup.com" className={isDarkMode ? "bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition" : "bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center border border-blue-300 hover:bg-blue-200 transition"}>
-                        <Mail size={20} />
-                      </a>
+                    <div className="mt-8">
+                      <h4 className="font-medium mb-4">Suivez-nous</h4>
+                      <div className="flex gap-4">
+                        <a href="https://www.linkedin.com/company/linkedin-local-douala/" target="_blank" rel="noopener noreferrer" className={isDarkMode ? "bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition" : "bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center border border-blue-300 hover:bg-blue-200 transition"}>
+                          <Linkedin size={20} />
+                        </a>
+                        <a href="mailto:infos@stayupgroup.com" className={isDarkMode ? "bg-blue-700/50 w-10 h-10 rounded-full flex items-center justify-center border border-blue-400/30 hover:bg-blue-600/50 transition" : "bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center border border-blue-300 hover:bg-blue-200 transition"}>
+                          <Mail size={20} />
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-8 pt-8 border-t border-blue-500/30">
-                    <h4 className="font-medium mb-4">Hashtags</h4>
-                    <div className="flex flex-wrap gap-2">
-                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
-                        #LinkedInLocalDouala
-                      </span>
-                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
-                        #Networking
-                      </span>
-                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
-                        #BusinessOpportunities
-                      </span>
-                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
-                        #Entreprises
-                      </span>
-                      <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
-                        #Partenariat
-                      </span>
+                    <div className="mt-8 pt-8 border-t border-blue-500/30">
+                      <h4 className="font-medium mb-4">Hashtags</h4>
+                      <div className="flex flex-wrap gap-2">
+                        <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
+                          #LinkedInLocalDouala
+                        </span>
+                        <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
+                          #Networking
+                        </span>
+                        <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
+                          #BusinessOpportunities
+                        </span>
+                        <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
+                          #Entreprises
+                        </span>
+                        <span className={isDarkMode ? "bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30" : "bg-blue-100 px-3 py-1 rounded-full text-sm border border-blue-300"}>
+                          #Partenariat
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -899,6 +953,30 @@ function App() {
         </div>
       )}
 
+      {/* Package Popup */}
+      {showPackagePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md" onClick={closePackagePopup}></div>
+          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in" onClick={stopPropagation}>
+            <button 
+              onClick={closePackagePopup}
+              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10"
+            >
+              <X size={18} />
+            </button>
+            <div className="flex flex-col items-center">
+              <img src="/package.jpeg" alt="Package" className="w-full h-auto rounded-lg mb-4" />
+              <button 
+                onClick={openPackageWhatsApp}
+                className="bg-blue-500 hover:bg-blue-400 px-6 py-3 rounded-md font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 inline-flex items-center gap-2"
+              >
+                Reserver ton package
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Success Notification - Centered Popup */}
       {showNotification && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -925,6 +1003,37 @@ function App() {
           </div>
         </div>
       )}
+
+      {/* Brief Popup */}
+      {showBriefPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md" onClick={closeBriefPopup}></div>
+          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in" onClick={stopPropagation}>
+            <button 
+              onClick={closeBriefPopup}
+              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10"
+            >
+              <X size={18} />
+            </button>
+            <div className="text-white">
+              <h3 className="text-2xl font-bold mb-4">LLD2025 en bref...</h3>
+              <p className="mb-4">🔹 𝗖'𝗲𝘀𝘁 𝗾𝘂𝗼𝗶 𝗟𝗶𝗻𝗸𝗲𝗱𝗜𝗻 𝗟𝗼𝗰𝗮𝗹 ? LinkedIn Local Douala est une initiative qui rassemble des professionnels de tous horizons pour favoriser le réseautage, le partage de connaissances et l’inspiration mutuelle. Ces rencontres permettent d’explorer les opportunités du digital, notamment à travers la plateforme LinkedIn.</p>
+              <p>📢 𝐔𝐧𝐞 𝐝𝐞𝐮𝐱𝐢𝐞̀𝐦𝐞 𝐞́𝐝𝐢𝐭𝐢𝐨𝐧 𝐞𝐧𝐜𝐨𝐫𝐞 𝐩𝐥𝐮𝐬 𝐠𝐫𝐚𝐧𝐝𝐞 ! Pour cette nouvelle édition, l’équipe d’organisation voit les choses en grand. Une cagnotte de 𝟱𝟬 𝟬𝟬𝟬 FCFA sera mise en jeu pour récompenser les meilleurs contributeurs ! 🎯🏆</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating WhatsApp Button */}
+      <button 
+        onClick={openWhatsApp}
+        className="fixed bottom-4 right-4 bg-green-500 hover:bg-green-400 text-white p-4 rounded-full shadow-lg transition transform hover:scale-105"
+      >
+        <svg xmlns="/watsapp.svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21.5 20.5L18 17M22 11.5A10.5 10.5 0 1 1 11.5 1 10.5 10.5 0 0 1 22 11.5z"/>
+          <path d="M16.5 11.5c-.5-1-1.5-2-2.5-2.5s-2-.5-3 0-1.5 1-2 2-1 2-1 3 .5 2 1 3 1.5 1.5 2.5 2 2 .5 3 0 2-1 2.5-2 .5-2 0-3z"/>
+        </svg>
+      </button>
     </div>
   );
 }
