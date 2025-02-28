@@ -250,6 +250,10 @@ function App() {
     window.open('https://wa.me/237694846159?text=Bonjour%20Olivier,%20j%27ai%20besoin%20de%20votre%20expertise...', '_blank');
   };
 
+  const openPassLink = () => {
+    window.open('https://tally.so/r/mVbQD6', '_blank');
+  };
+
   const handleImageError = (imageType: 'banner' | 'profile') => {
     setImageErrors(prev => ({ ...prev, [imageType]: true }));
   };
@@ -671,6 +675,7 @@ function App() {
                   </div>
                 )}
                 <button 
+                  onClick={openPassLink}
                   className="bg-transparent hover:bg-green-100 hover:text-black px-8 py-4 rounded-md font-medium transition border border-blue-400/30 text-lg inline-flex items-center gap-2"
                 >
                   Acheter un pass
