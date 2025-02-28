@@ -440,9 +440,10 @@ function App() {
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setShowPopup(true)}
-              className="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 flex items-center gap-2"
+              className="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded font-medium transition transform hover:scale-105 border border-blue-400/50 shadow-lg shadow-blue-500/20 flex items-center gap-2 md:gap-2"
             >
-              About Me <HelpCircle size={16} />
+              <HelpCircle size={16} />
+              <span className="hidden md:inline">About Me</span>
             </button>
             <button 
               onClick={toggleTheme}
@@ -882,8 +883,8 @@ function App() {
                 )}
               </div>
               <div>
-                <h3 className="text-2xl font-bold mb-2 cyber-text">Olivier KAMDEM</h3>
-                <p className="text-blue-200 mb-4">
+                <h3 className="text-xl md:text-2xl font-bold mb-2 cyber-text">Olivier KAMDEM</h3>
+                <p className="text-blue-200 mb-4 text-sm md:text-base">
                   Consultant ERP (Odoo, NetSuite) | UI Developer & Digital Marketing Evangelist | Expert SEO, je vous accompagne à 360° dans la digitalisation de vos processus métiers et l'optimisation de votre présence digitale.
                 </p>
                 <div className="space-y-3">
@@ -978,34 +979,34 @@ function App() {
               </div>
             </div>
             
-            <div className="mt-6 pt-6 border-t border-blue-500/30">
+            <div className="mt-6 pt-6 border-t border-blue-500/30 hidden md:block">
               <h4 className="font-medium text-blue-300 mb-3">Expertise</h4>
               <div className="flex flex-wrap gap-2">
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   ERP (Odoo, NetSuite)
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   UI Development
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   Digital Marketing
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   SEO
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   Digitalisation
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   Transformation Digitale
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   Social Media
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   UI-UX Design
                 </span>
-                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-sm border border-blue-400/30">
+                <span className="bg-blue-700/50 px-3 py-1 rounded-full text-xs md:text-sm border border-blue-400/30">
                   Coaching
                 </span>
               </div>
