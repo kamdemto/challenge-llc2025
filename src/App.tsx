@@ -116,6 +116,15 @@ function App() {
       twitter: 'https://twitter.com/henryadams',
       // ...other social links...
     },
+    {
+      name: 'Olvier Kamdem',
+      function: 'Blockchain Developer at BlockChainers',
+      theme: 'Blockchain Technology',
+      image: '/speaker9.jpg',
+      linkedin: 'https://linkedin.com/in/henryadams',
+      twitter: 'https://twitter.com/henryadams',
+      // ...other social links...
+    },
     // ...7 more speakers...
   ];
 
@@ -205,6 +214,16 @@ function App() {
       setScrollPosition(0);
     }
   }, [scrollPosition, speakers.length]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isHovered) {
+        handleNext();
+      }
+    }, 3000); // Adjust the interval as needed
+
+    return () => clearInterval(interval);
+  }, [isHovered, currentIndex]);
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -339,11 +358,13 @@ function App() {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % speakers.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % Math.ceil(speakers.length / 4));
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + speakers.length) % speakers.length);
+    if (currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
   };
 
   const openPackagePopup = () => {
@@ -563,19 +584,19 @@ function App() {
             Les Intervenants
           </h2>
           <div className="flex justify-between items-center mb-4">
-            <button onClick={handlePrev} className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full">
+            <button onClick={handlePrev} className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full" disabled={currentIndex === 0}>
               <ArrowLeft size={24} />
             </button>
-            <button onClick={handleNext} className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full">
+            <button onClick={handleNext} className="bg-blue-500 hover:bg-blue-400 p-2 rounded-full" disabled={currentIndex >= Math.ceil(speakers.length / 4) - 1}>
               <ArrowRight size={24} />
             </button>
           </div>
           <div 
-            className="overflow-hidden whitespace-nowrap scrollbar-hide"
+            className="overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="inline-flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+            <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
               {speakers.map((speaker, index) => (
                 <div key={index} className="w-full sm:w-1/4 md:w-1/4 flex-shrink-0 p-4">
                   <div className="relative group">
