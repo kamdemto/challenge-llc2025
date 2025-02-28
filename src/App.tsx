@@ -810,12 +810,12 @@ function App() {
                     
       {/* Olivier Kamdem Popup */}
       {showPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md" onClick={() => setShowPopup(false)}></div>
-          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in" onClick={stopPropagation}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out">
+          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md transition-opacity duration-300 ease-in-out" onClick={() => setShowPopup(false)}></div>
+          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in transition-transform duration-300 ease-in-out" onClick={stopPropagation}>
             <button 
               onClick={() => setShowPopup(false)}
-              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10"
+              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10 transition-transform duration-300 ease-in-out"
             >
               <X size={18} />
             </button>
@@ -979,12 +979,12 @@ function App() {
 
       {/* Package Popup */}
       {showPackagePopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md" onClick={closePackagePopup}></div>
-          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in" onClick={stopPropagation}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out">
+          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md transition-opacity duration-300 ease-in-out" onClick={closePackagePopup}></div>
+          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in transition-transform duration-300 ease-in-out" onClick={stopPropagation}>
             <button 
               onClick={closePackagePopup}
-              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10"
+              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10 transition-transform duration-300 ease-in-out"
             >
               <X size={18} />
             </button>
@@ -1003,10 +1003,10 @@ function App() {
 
       {/* Success Notification - Centered Popup */}
       {showNotification && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-blue-950/70 backdrop-blur-sm" onClick={() => setShowNotification(false)}></div>
-          <div className="relative bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl border border-blue-400/50 shadow-2xl shadow-blue-500/30 max-w-md w-full p-6 animate-celebration" onClick={stopPropagation}>
-            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out">
+          <div className="absolute inset-0 bg-blue-950/70 backdrop-blur-sm transition-opacity duration-300 ease-in-out" onClick={() => setShowNotification(false)}></div>
+          <div className="relative bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl border border-blue-400/50 shadow-2xl shadow-blue-500/30 max-w-md w-full p-6 animate-celebration transition-transform duration-300 ease-in-out" onClick={stopPropagation}>
+            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 transition-transform duration-300 ease-in-out">
               <PartyPopper className="text-yellow-300" size={48} />
             </div>
             <div className="text-center">
@@ -1030,12 +1030,12 @@ function App() {
 
       {/* Brief Popup */}
       {showBriefPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md" onClick={closeBriefPopup}></div>
-          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in" onClick={stopPropagation}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ease-in-out">
+          <div className="absolute inset-0 bg-blue-950/90 backdrop-blur-md transition-opacity duration-300 ease-in-out" onClick={closeBriefPopup}></div>
+          <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl border border-blue-500/30 shadow-2xl shadow-blue-500/20 max-w-2xl w-full p-6 md:p-8 animate-in transition-transform duration-300 ease-in-out" onClick={stopPropagation}>
             <button 
               onClick={closeBriefPopup}
-              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10"
+              className="absolute top-4 right-4 bg-blue-800/80 hover:bg-blue-700 w-8 h-8 rounded-full flex items-center justify-center border border-blue-400/30 z-10 transition-transform duration-300 ease-in-out"
             >
               <X size={18} />
             </button>
@@ -1050,12 +1050,12 @@ function App() {
 
       {/* Floating WhatsApp Button */}
       <div 
-        className="fixed bottom-4 right-8 flex items-center"
+        className="fixed bottom-4 right-8 flex items-center transition-opacity duration-300 ease-in-out"
         onMouseEnter={() => setShowWhatsAppTooltip(true)}
         onMouseLeave={() => setShowWhatsAppTooltip(false)}
       >
         {showWhatsAppTooltip && (
-          <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-md mr-2">
+          <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-md mr-2 transition-opacity duration-300 ease-in-out">
             Discutons sur Whatsapp !
           </div>
         )}
